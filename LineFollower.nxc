@@ -1,0 +1,46 @@
+#define POWER 45
+#define PROPORTIONAL 1000
+
+
+// Task main of the program.
+task main()
+{
+
+   // Value collected by the sensor
+   int currently_value;
+   
+   // Average between color white and black.
+   float average = 43;
+   
+   // Difference between the current value and the average.
+   int error;
+   
+   // Error value multiplied by the proportional constant.
+   float gain;
+   
+   // The force that will be generated for the two engines.
+   int power_B, power_C;
+
+
+   // It sets a Light sensor in the input 1.
+   SetSensorLight(IN_1);
+
+
+   while(true){
+
+       currently_value = Sensor(IN_1);
+
+       error = currently_value - average;
+
+       gain = error * PROPORTIONAL;
+           
+       gain = gain / PROPORTIONAL;
+
+       power_B = gain - POWER;
+
+       power_C = gain + POWER;
+
+       OnRev(OUT_B, power_B);
+       OnFwd(OUT_C, power_C);
+   }
+}
