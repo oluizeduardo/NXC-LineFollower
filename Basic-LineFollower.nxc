@@ -1,0 +1,27 @@
+#define POWER 50
+#define LIGHT_INTENSITY 55
+
+
+
+// Task main of the program.
+task main()
+{
+
+
+
+   // It sets a Light sensor in the input 1.
+   SetSensorLight(IN_1);
+
+
+   while(true){
+
+      OnFwd(OUT_B, POWER);
+      until(Sensor(IN_1) < LIGHT_INTENSITY);
+      Off(OUT_B);
+
+      OnFwd(OUT_C, POWER);
+      until(Sensor(IN_1) > LIGHT_INTENSITY);
+      Off(OUT_C);
+
+   }
+}
